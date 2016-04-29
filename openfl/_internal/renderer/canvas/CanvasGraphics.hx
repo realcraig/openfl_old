@@ -486,11 +486,11 @@ class CanvasGraphics {
 	private static function playCommands (commands:DrawCommandBuffer, stroke:Bool = false):Void {
 		
 		#if (js && html5)
-		bounds = graphics.__bounds;
-		
+		bounds = graphics.__bounds != null ? graphics.__bounds : new Rectangle(0, 0, 0, 0);
+
 		var offsetX = bounds.x;
 		var offsetY = bounds.y;
-		
+
 		var positionX = 0.0;
 		var positionY = 0.0;
 		
