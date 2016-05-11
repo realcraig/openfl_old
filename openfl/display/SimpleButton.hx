@@ -123,7 +123,7 @@ class SimpleButton extends InteractiveObject {
 			
 			var cacheTransform = __updateTransform (hitTestState);
 			
-			if (hitTestState.__hitTest (x, y, shapeFlag, stack, interactiveOnly, hitObject)) {
+			if (stack != null && hitTestState.__hitTest (x, y, shapeFlag, stack, interactiveOnly, hitObject)) {
 				
 				stack[stack.length - 1] = hitObject;
 				hitTest = true;
