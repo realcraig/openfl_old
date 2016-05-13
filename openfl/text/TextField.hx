@@ -1748,7 +1748,8 @@ class TextField extends InteractiveObject {
 	private function window_onKeyDown (key:KeyCode, modifier:KeyModifier):Void {
 		
 		switch (key) {
-			
+            case NUMPAD_ENTER, RETURN:
+                dispatchEvent(new Event (Event.KEYBOARD_RETURN, false, true));
 			case BACKSPACE:
 				
 				if (__selectionIndex == __caretIndex && __caretIndex > 0) {
