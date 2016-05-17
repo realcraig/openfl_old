@@ -535,6 +535,14 @@ class TextField extends InteractiveObject {
 		__layoutDirty = true;
 		
 	}
+
+	public function focus():Void {
+		if (stage == null) return;
+		stage.focus = this;
+		this_onFocusIn(null);
+		__stopCursorTimer ();
+		__startCursorTimer ();
+	}
 	
 	
 	private override function __getBounds (rect:Rectangle, matrix:Matrix):Void {
@@ -557,6 +565,8 @@ class TextField extends InteractiveObject {
 	private function __getPosition (x:Float, y:Float):Int {
 		
 		__updateLayout ();
+
+		//trace('_getPosition: ' + x + ", " + y + " scrollH=" + scrollH);
 		
 		x += scrollH;
 		
@@ -606,11 +616,15 @@ class TextField extends InteractiveObject {
 						if (x <= group.offsetX + advance) {
 							
 							if (x <= group.offsetX + (advance - group.advances[i]) + (group.advances[i] / 2)) {
-								
+								//trace('getP 1: ' + (group.startIndex + i));
 								return group.startIndex + i;
 								
 							} else {
-								
+								/*if(group.startIndex + i < group.endIndex) {
+									trace('getP 2: ' + (group.startIndex + i + 1));
+								} else {
+									trace('getP 3: ' + (group.endIndex));
+								}*/
 								return (group.startIndex + i < group.endIndex) ? group.startIndex + i + 1 : group.endIndex;
 								
 							}
@@ -1750,6 +1764,8 @@ class TextField extends InteractiveObject {
 		switch (key) {
             case NUMPAD_ENTER, RETURN:
                 dispatchEvent(new Event (Event.KEYBOARD_RETURN, false, true));
+			case TAB, NUMPAD_TAB:
+				dispatchEvent(new Event (Event.TAB, false, true));
 			case BACKSPACE:
 				
 				if (__selectionIndex == __caretIndex && __caretIndex > 0) {

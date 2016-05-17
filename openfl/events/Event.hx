@@ -31,6 +31,7 @@ class Event {
 	public static inline var SCROLL = "scroll";
 	public static inline var SELECT = "select";
 	public static inline var SOUND_COMPLETE = "soundComplete";
+	public static inline var TAB = "tab";
 	public static inline var TAB_CHILDREN_CHANGE = "tabChildrenChange";
 	public static inline var TAB_ENABLED_CHANGE = "tabEnabledChange";
 	public static inline var TAB_INDEX_CHANGE = "tabIndexChange";
