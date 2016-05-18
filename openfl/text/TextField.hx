@@ -616,15 +616,9 @@ class TextField extends InteractiveObject {
 						if (x <= group.offsetX + advance) {
 							
 							if (x <= group.offsetX + (advance - group.advances[i]) + (group.advances[i] / 2)) {
-								//trace('getP 1: ' + (group.startIndex + i));
 								return group.startIndex + i;
 								
 							} else {
-								/*if(group.startIndex + i < group.endIndex) {
-									trace('getP 2: ' + (group.startIndex + i + 1));
-								} else {
-									trace('getP 3: ' + (group.endIndex));
-								}*/
 								return (group.startIndex + i < group.endIndex) ? group.startIndex + i + 1 : group.endIndex;
 								
 							}
@@ -632,7 +626,6 @@ class TextField extends InteractiveObject {
 						}
 						
 					}
-					
 					return group.endIndex;
 					
 				}
@@ -640,7 +633,7 @@ class TextField extends InteractiveObject {
 			}
 			
 		}
-		
+
 		return __textEngine.text.length;
 		
 	}

@@ -32,6 +32,7 @@ class CanvasTextField {
 
 #if (js && html5)
 	private static var context:CanvasRenderingContext2D;
+	private static var caretWidth:Int = 4;
 #end
 
 
@@ -259,7 +260,7 @@ class CanvasTextField {
 
 										}
 
-										context.fillRect (group.offsetX + advance, group.offsetY, 1, group.height);
+										context.fillRect (group.offsetX + advance + scrollX, group.offsetY, caretWidth, group.height);
 
 									}
 
@@ -298,7 +299,7 @@ class CanvasTextField {
 									if (start != null && end != null) {
 
 										context.fillStyle = "#000000";
-										context.fillRect (start.x, start.y, end.x - start.x, group.height);
+										context.fillRect (start.x + scrollX, start.y, end.x - start.x, group.height);
 										context.fillStyle = "#FFFFFF";
 
 // TODO: fill only once
@@ -318,7 +319,7 @@ class CanvasTextField {
 						if (textField.__showCursor) {
 
 							var format = textEngine.textFormatRanges.length > 0 ? textEngine.textFormatRanges[0].format : TextField.__defaultTextFormat;
-							context.fillRect (0, 0, 1, format.size * 1.185 + format.leading);
+							context.fillRect (0, 0, caretWidth, format.size * 1.185 + format.leading);
 
 						}
 
