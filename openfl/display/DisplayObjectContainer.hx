@@ -619,11 +619,28 @@ class DisplayObjectContainer extends InteractiveObject {
 		}
 		
 	}
-	
+
+	private function __removeOrphans ():Void {
+		if (__removedChildren.length > 0) {
+
+			__removedChildren.splice (0, __removedChildren.length);
+
+		}
+		for (child in __children) {
+
+			if (Std.is(child, DisplayObjectContainer)) {
+				cast(child, DisplayObjectContainer).__removeOrphans();
+			}
+
+		}
+	}
 	
 	public override function __renderCanvas (renderSession:RenderSession):Void {
 		
-		if (!__renderable || __worldAlpha <= 0) return;
+		if (!__renderable || __worldAlpha <= 0) {
+			this.__removeOrphans();
+			return;
+		}
 		
 		#if !neko
 		
